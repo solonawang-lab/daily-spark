@@ -1,9 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-
-// In production, use Vercel KV or a database
-// For MVP, we'll use a simple in-memory store + file persistence
 import { promises as fs } from 'fs';
 import path from 'path';
+import { sendWelcomeEmail } from '@/lib/email';
 
 const SUBSCRIBERS_FILE = path.join(process.cwd(), 'data', 'subscribers.json');
 
@@ -112,7 +110,17 @@ export async function POST(request: NextRequest) {
     subscribers.push(newSubscriber);
     await saveSubscribers(subscribers);
 
-    // TODO: Send welcome email via Resend
+    // Send welcome email
+    if (process.env.RESEND_API_KEY) {
+      await sendWelcomeEmail({
+        email: newSubscriber.email,
+        category: newSubscriber.category,
+        style: newSubscriber.style,
+        deliveryTime: newSubscriber.deliveryTime,
+        isTrial: true,
+      });
+    }
+
     console.log('New subscriber:', newSubscriber);
 
     return NextResponse.json({ 
