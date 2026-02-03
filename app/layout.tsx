@@ -8,23 +8,23 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Daily Spark — Wake up inspired",
-  description: "A premium wallpaper with a curated quote, generated fresh and delivered to your inbox every morning. For people who take mornings seriously.",
-  keywords: ["wallpaper", "quotes", "morning routine", "AI", "stoicism", "productivity", "motivation"],
+  title: "Daily Spark ☀️ Wake up inspired",
+  description: "A beautiful wallpaper with a curated quote, freshly generated and delivered to your inbox each morning. Your daily dose of motivation.",
+  keywords: ["wallpaper", "quotes", "morning routine", "AI", "stoicism", "productivity", "motivation", "inspiration"],
   authors: [{ name: "Daily Spark" }],
   openGraph: {
-    title: "Daily Spark — Wake up inspired",
-    description: "A premium wallpaper with a curated quote, delivered every morning.",
+    title: "Daily Spark ☀️ Wake up inspired",
+    description: "A beautiful wallpaper with a curated quote, delivered every morning.",
     type: "website",
     siteName: "Daily Spark",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Daily Spark",
-    description: "The first thing you see shapes your day.",
+    title: "Daily Spark ☀️",
+    description: "Wake up to inspiration, every single day.",
   },
   viewport: "width=device-width, initial-scale=1, viewport-fit=cover",
-  themeColor: "#fafaf9",
+  themeColor: "#F59E0B",
 };
 
 export default function RootLayout({

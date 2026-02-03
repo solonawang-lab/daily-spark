@@ -22,53 +22,50 @@ export default function ShortcutPage() {
   };
 
   return (
-    <div className="min-h-screen bg-stone-50">
+    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
       <div className="container mx-auto px-6 py-12 max-w-xl">
         <Link 
           href="/"
-          className="inline-flex items-center gap-2 text-stone-500 hover:text-stone-900 transition-colors mb-12"
+          className="inline-flex items-center gap-2 text-amber-600 hover:text-amber-900 transition-colors mb-10"
         >
-          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" />
-          </svg>
-          Back
+          ← Back
         </Link>
 
         <div className="mb-10">
-          <span className="inline-block px-2.5 py-1 bg-amber-100 text-amber-800 text-xs font-medium rounded-full mb-4">
-            Power user
+          <span className="inline-block px-3 py-1 bg-amber-100 text-amber-800 text-xs font-semibold rounded-full mb-4">
+            ⚡ POWER USER
           </span>
-          <h1 className="text-2xl font-semibold text-stone-900 mb-3">iOS Shortcut Setup</h1>
-          <p className="text-stone-500">
-            Automatically set your Daily Spark wallpaper every morning. No taps.
+          <h1 className="text-2xl font-bold text-amber-900 mb-3">iOS Shortcut Setup</h1>
+          <p className="text-amber-700">
+            Your wallpaper updates automatically every morning. Zero effort! 🌅
           </p>
         </div>
 
         <div className="space-y-4">
           {/* Step 1 */}
-          <div className="bg-white border border-stone-200 rounded-xl p-5">
+          <div className="bg-white border-2 border-amber-100 rounded-2xl p-5 shadow-sm">
             <div className="flex items-center gap-3 mb-4">
-              <span className="w-7 h-7 rounded-full bg-stone-900 text-white text-sm font-medium flex items-center justify-center">1</span>
-              <h2 className="text-stone-900 font-medium">Enter your email</h2>
+              <span className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 text-white text-sm font-bold flex items-center justify-center shadow-md">1</span>
+              <h2 className="text-amber-900 font-semibold">Enter your email</h2>
             </div>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="your@email.com"
-              className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-lg text-stone-900 placeholder:text-stone-400 focus:outline-none focus:border-stone-400 transition-colors"
+              className="w-full px-4 py-3 bg-amber-50 border-2 border-amber-100 rounded-xl text-amber-900 placeholder:text-amber-400 focus:outline-none focus:border-amber-300 transition-colors"
             />
-            <p className="text-stone-400 text-sm mt-2">The email you used to sign up</p>
+            <p className="text-amber-500 text-sm mt-2">The email you signed up with</p>
           </div>
 
           {/* Step 2 */}
-          <div className="bg-white border border-stone-200 rounded-xl p-5">
+          <div className="bg-white border-2 border-amber-100 rounded-2xl p-5 shadow-sm">
             <div className="flex items-center gap-3 mb-4">
-              <span className="w-7 h-7 rounded-full bg-stone-900 text-white text-sm font-medium flex items-center justify-center">2</span>
-              <h2 className="text-stone-900 font-medium">Create the Shortcut</h2>
+              <span className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 text-white text-sm font-bold flex items-center justify-center shadow-md">2</span>
+              <h2 className="text-amber-900 font-semibold">Create the Shortcut</h2>
             </div>
-            <p className="text-stone-500 text-sm mb-4">
-              Open the Shortcuts app and create a new shortcut with these actions:
+            <p className="text-amber-700 text-sm mb-4">
+              In the Shortcuts app, create a new shortcut with these actions:
             </p>
             <ol className="space-y-2 text-sm">
               {[
@@ -76,19 +73,19 @@ export default function ShortcutPage() {
                 { action: 'Save to Photo Album', detail: 'Save the image' },
                 { action: 'Set Wallpaper', detail: 'Choose Lock Screen' },
               ].map((item, i) => (
-                <li key={i} className="flex gap-2 text-stone-600">
-                  <span className="text-stone-400">{i + 1}.</span>
-                  <span><span className="text-stone-900">{item.action}</span> — {item.detail}</span>
+                <li key={i} className="flex gap-2 text-amber-700">
+                  <span className="text-amber-400">{i + 1}.</span>
+                  <span><span className="text-amber-900 font-medium">{item.action}</span> — {item.detail}</span>
                 </li>
               ))}
             </ol>
           </div>
 
           {/* Step 3 */}
-          <div className="bg-white border border-stone-200 rounded-xl p-5">
+          <div className="bg-white border-2 border-amber-100 rounded-2xl p-5 shadow-sm">
             <div className="flex items-center gap-3 mb-4">
-              <span className="w-7 h-7 rounded-full bg-stone-900 text-white text-sm font-medium flex items-center justify-center">3</span>
-              <h2 className="text-stone-900 font-medium">Your API URL</h2>
+              <span className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 text-white text-sm font-bold flex items-center justify-center shadow-md">3</span>
+              <h2 className="text-amber-900 font-semibold">Your API URL</h2>
             </div>
             {shortcutUrl ? (
               <div className="flex gap-2">
@@ -96,55 +93,53 @@ export default function ShortcutPage() {
                   type="text"
                   value={shortcutUrl}
                   readOnly
-                  className="flex-1 px-3 py-2.5 bg-stone-50 border border-stone-200 rounded-lg text-stone-600 text-sm font-mono truncate"
+                  className="flex-1 px-3 py-2.5 bg-amber-50 border-2 border-amber-100 rounded-xl text-amber-700 text-sm font-mono truncate"
                 />
                 <button
                   onClick={handleCopy}
-                  className={`px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
+                  className={`px-4 py-2.5 rounded-xl text-sm font-semibold transition-all ${
                     copied 
                       ? 'bg-green-100 text-green-700' 
-                      : 'bg-stone-900 text-white hover:bg-stone-800'
+                      : 'bg-gradient-to-r from-amber-500 to-orange-500 text-white hover:from-amber-600 hover:to-orange-600 shadow-md'
                   }`}
                 >
-                  {copied ? 'Copied' : 'Copy'}
+                  {copied ? '✓ Copied!' : 'Copy'}
                 </button>
               </div>
             ) : (
-              <p className="text-stone-400 text-sm">Enter your email above to generate your URL</p>
+              <p className="text-amber-500 text-sm">👆 Enter your email above to get your URL</p>
             )}
           </div>
 
           {/* Step 4 */}
-          <div className="bg-white border border-stone-200 rounded-xl p-5">
+          <div className="bg-white border-2 border-amber-100 rounded-2xl p-5 shadow-sm">
             <div className="flex items-center gap-3 mb-4">
-              <span className="w-7 h-7 rounded-full bg-stone-900 text-white text-sm font-medium flex items-center justify-center">4</span>
-              <h2 className="text-stone-900 font-medium">Automate it</h2>
+              <span className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 text-white text-sm font-bold flex items-center justify-center shadow-md">4</span>
+              <h2 className="text-amber-900 font-semibold">Automate it!</h2>
             </div>
-            <ol className="space-y-2 text-sm text-stone-600">
-              <li>Open <span className="text-stone-900">Shortcuts</span> → Automation tab</li>
+            <ol className="space-y-2 text-sm text-amber-700">
+              <li>Open <span className="text-amber-900 font-medium">Shortcuts</span> → Automation tab</li>
               <li>Tap + → Create Personal Automation</li>
-              <li>Choose <span className="text-stone-900">Time of Day</span> → set your wake time</li>
+              <li>Choose <span className="text-amber-900 font-medium">Time of Day</span> → set your wake time</li>
               <li>Select your shortcut → turn OFF "Ask Before Running"</li>
             </ol>
           </div>
         </div>
 
-        <div className="mt-8 p-5 bg-green-50 border border-green-200 rounded-xl">
+        <div className="mt-8 p-5 bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200 rounded-2xl">
           <div className="flex gap-3">
-            <svg className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-            </svg>
+            <span className="text-2xl">✅</span>
             <div>
-              <h3 className="text-stone-900 font-medium text-sm mb-1">That's it</h3>
-              <p className="text-stone-600 text-sm">
-                Every morning, your wallpaper updates automatically before you wake up.
+              <h3 className="text-green-800 font-semibold text-sm mb-1">That's it!</h3>
+              <p className="text-green-700 text-sm">
+                Every morning, your wallpaper updates automatically. Sweet dreams! 🌙
               </p>
             </div>
           </div>
         </div>
 
-        <p className="text-stone-400 text-sm text-center mt-10">
-          Questions? Reply to any Daily Spark email.
+        <p className="text-amber-500 text-sm text-center mt-10">
+          Questions? Just reply to any Daily Spark email 💌
         </p>
       </div>
     </div>

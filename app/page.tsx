@@ -7,7 +7,7 @@ import { Style, styles, getAllStyles } from '@/lib/styles';
 export default function Home() {
   const [email, setEmail] = useState('');
   const [category, setCategory] = useState<Category>('stoicism');
-  const [style, setStyle] = useState<Style>('dark');
+  const [style, setStyle] = useState<Style>('nature');
   const [deliveryTime, setDeliveryTime] = useState('6am');
   const [step, setStep] = useState<'landing' | 'preferences' | 'preview' | 'success'>('landing');
   const [isLoading, setIsLoading] = useState(false);
@@ -89,172 +89,181 @@ export default function Home() {
   // Landing page
   if (step === 'landing') {
     return (
-      <div className="min-h-screen bg-stone-50">
-        <div className="relative">
-          {/* Nav */}
-          <nav className="container mx-auto px-6 py-6 flex justify-between items-center max-w-5xl">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-sm">
-                <span className="text-white text-sm font-bold">S</span>
-              </div>
-              <span className="text-stone-900 font-semibold tracking-tight">Daily Spark</span>
+      <div className="min-h-screen bg-gradient-to-b from-amber-50 via-orange-50/30 to-white">
+        {/* Nav */}
+        <nav className="container mx-auto px-6 py-6 flex justify-between items-center max-w-5xl">
+          <div className="flex items-center gap-2.5">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-lg shadow-orange-200">
+              <span className="text-white text-sm font-bold">☀️</span>
             </div>
-            <button 
-              onClick={() => document.getElementById('signup')?.scrollIntoView({ behavior: 'smooth' })}
-              className="text-sm text-stone-600 hover:text-stone-900 transition-colors"
-            >
-              Get started
-            </button>
-          </nav>
+            <span className="text-amber-900 font-semibold tracking-tight text-lg">Daily Spark</span>
+          </div>
+          <button 
+            onClick={() => document.getElementById('signup')?.scrollIntoView({ behavior: 'smooth' })}
+            className="text-sm text-amber-700 hover:text-amber-900 font-medium transition-colors"
+          >
+            Get started →
+          </button>
+        </nav>
 
-          {/* Hero */}
-          <div className="container mx-auto px-6 pt-16 pb-24 max-w-3xl">
-            <div className={`transition-all duration-700 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-              <p className="text-amber-700 text-sm font-medium tracking-wide mb-6">
-                For people who take mornings seriously
+        {/* Hero */}
+        <div className="container mx-auto px-6 pt-12 pb-16 max-w-3xl">
+          <div className={`text-center transition-all duration-700 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-100 text-amber-800 rounded-full text-sm font-medium mb-8">
+              <span>✨</span>
+              Start your mornings with intention
+            </div>
+            
+            <h1 className="text-4xl md:text-5xl font-bold text-amber-950 leading-tight mb-6">
+              Wake up to inspiration,<br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-500">
+                every single day
+              </span>
+            </h1>
+            
+            <p className="text-lg text-amber-800/70 max-w-xl mx-auto leading-relaxed mb-10">
+              A beautiful wallpaper with a curated quote, freshly generated and delivered 
+              to your inbox each morning. Your phone becomes your daily dose of motivation.
+            </p>
+
+            {/* Email signup */}
+            <form onSubmit={handleEmailSubmit} id="signup" className="max-w-md mx-auto">
+              <div className="flex gap-2 p-2 bg-white border-2 border-amber-200 rounded-2xl shadow-lg shadow-amber-100">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  className="flex-1 px-4 py-3 bg-transparent text-amber-900 placeholder:text-amber-400 focus:outline-none"
+                />
+                <button
+                  type="submit"
+                  className="px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold rounded-xl hover:from-amber-600 hover:to-orange-600 transition-all shadow-md shadow-orange-200"
+                >
+                  Start free ☀️
+                </button>
+              </div>
+              {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+              <p className="text-amber-600 text-sm mt-4">
+                🎁 7 days free · Then just $49/year · Cancel anytime
               </p>
-              
-              <h1 className="text-[clamp(2.25rem,6vw,3.5rem)] font-semibold text-stone-900 leading-[1.15] tracking-tight mb-6">
-                The first thing you see<br />
-                shapes your day.
-              </h1>
-              
-              <p className="text-lg text-stone-600 max-w-xl leading-relaxed mb-10">
-                A premium wallpaper with a curated quote, generated fresh and delivered 
-                to your inbox every morning. No effort required.
-              </p>
-
-              {/* Email signup */}
-              <form onSubmit={handleEmailSubmit} id="signup" className="max-w-md">
-                <div className="flex gap-2 p-1.5 bg-white border border-stone-200 rounded-xl shadow-sm">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email"
-                    className="flex-1 px-4 py-2.5 bg-transparent text-stone-900 placeholder:text-stone-400 focus:outline-none"
-                  />
-                  <button
-                    type="submit"
-                    className="px-5 py-2.5 bg-stone-900 text-white font-medium rounded-lg hover:bg-stone-800 transition-colors"
-                  >
-                    Start free
-                  </button>
-                </div>
-                {error && <p className="text-red-600 text-sm mt-2 ml-1">{error}</p>}
-                <p className="text-stone-500 text-sm mt-3 ml-1">
-                  7 days free, then $49/year. Cancel anytime.
-                </p>
-              </form>
-            </div>
+            </form>
           </div>
-
-          {/* Phone preview section */}
-          <div className="container mx-auto px-6 pb-24 max-w-5xl">
-            <div className="relative flex justify-center">
-              {/* Phone mockup */}
-              <div className="relative w-[240px] aspect-[9/19] rounded-[2.5rem] bg-stone-900 p-2 shadow-2xl">
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-5 bg-stone-900 rounded-b-xl z-10" />
-                <div className="w-full h-full rounded-[2rem] bg-gradient-to-br from-stone-800 to-stone-900 overflow-hidden relative">
-                  <div className="absolute inset-0 bg-gradient-to-b from-indigo-900/80 via-purple-900/60 to-stone-900" />
-                  <div className="absolute inset-0 flex items-center justify-center p-6">
-                    <div className="text-center">
-                      <p className="text-white/90 text-base font-serif italic leading-relaxed mb-3">
-                        "The obstacle is the way."
-                      </p>
-                      <p className="text-white/50 text-xs">— Marcus Aurelius</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* How it works */}
-          <div className="bg-white border-y border-stone-200">
-            <div className="container mx-auto px-6 py-20 max-w-4xl">
-              <h2 className="text-stone-400 text-xs font-medium tracking-widest uppercase mb-12 text-center">
-                How it works
-              </h2>
-              
-              <div className="grid md:grid-cols-3 gap-12">
-                {[
-                  { 
-                    num: '01', 
-                    title: 'Choose your theme', 
-                    desc: 'Stoic philosophy, productivity wisdom, or motivational energy.' 
-                  },
-                  { 
-                    num: '02', 
-                    title: 'We do the rest', 
-                    desc: 'Every morning, AI generates a unique wallpaper just for you.' 
-                  },
-                  { 
-                    num: '03', 
-                    title: 'Wake up inspired', 
-                    desc: 'Open your phone to a fresh perspective. One tap to save.' 
-                  },
-                ].map((item, i) => (
-                  <div key={i}>
-                    <p className="text-stone-300 text-sm font-mono mb-3">{item.num}</p>
-                    <h3 className="text-stone-900 font-semibold mb-2">{item.title}</h3>
-                    <p className="text-stone-500 text-sm leading-relaxed">{item.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Pricing */}
-          <div className="container mx-auto px-6 py-20 max-w-lg">
-            <div className="bg-white border border-stone-200 rounded-2xl p-8 shadow-sm">
-              <div className="flex items-baseline gap-1 mb-1">
-                <span className="text-4xl font-semibold text-stone-900">$49</span>
-                <span className="text-stone-500">/year</span>
-              </div>
-              <p className="text-stone-500 text-sm mb-8">That's $4 per month. Less than one coffee.</p>
-              
-              <ul className="space-y-3 mb-8">
-                {[
-                  'Fresh AI wallpaper every morning',
-                  'Curated quotes from philosophy to productivity',
-                  '4 visual styles to match your aesthetic',
-                  'iOS Shortcut for zero-tap automation',
-                  'Cancel anytime',
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3 text-stone-700 text-sm">
-                    <svg className="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-
-              <button
-                onClick={() => document.getElementById('signup')?.scrollIntoView({ behavior: 'smooth' })}
-                className="w-full py-3 bg-stone-900 text-white font-medium rounded-xl hover:bg-stone-800 transition-colors"
-              >
-                Start 7-day free trial
-              </button>
-            </div>
-          </div>
-
-          {/* Footer */}
-          <footer className="container mx-auto px-6 py-8 max-w-5xl border-t border-stone-200">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <div className="flex items-center gap-2">
-                <div className="w-6 h-6 rounded-md bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center">
-                  <span className="text-white text-xs font-bold">S</span>
-                </div>
-                <span className="text-stone-500 text-sm">Daily Spark</span>
-              </div>
-              <p className="text-stone-400 text-sm">
-                Made for people who take their mornings seriously.
-              </p>
-            </div>
-          </footer>
         </div>
+
+        {/* Phone preview */}
+        <div className="container mx-auto px-6 pb-20 max-w-5xl">
+          <div className="relative flex justify-center">
+            <div className="relative w-[220px] aspect-[9/19] rounded-[2.5rem] bg-gradient-to-b from-amber-900 to-amber-950 p-2 shadow-2xl shadow-amber-200">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-5 bg-amber-950 rounded-b-xl z-10" />
+              <div className="w-full h-full rounded-[2rem] overflow-hidden relative">
+                <div className="absolute inset-0 bg-gradient-to-b from-orange-400 via-amber-500 to-amber-600" />
+                <div className="absolute inset-0 flex items-center justify-center p-6">
+                  <div className="text-center">
+                    <p className="text-white text-sm font-medium leading-relaxed mb-2 drop-shadow-lg">
+                      "Every morning brings new potential."
+                    </p>
+                    <p className="text-white/70 text-xs">— Daily Spark</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Floating elements */}
+            <div className="hidden md:block absolute -left-4 top-1/4 bg-white rounded-2xl p-4 shadow-xl shadow-amber-100 border border-amber-100 transform -rotate-3">
+              <p className="text-amber-600 text-xs font-medium mb-1">📬 Tomorrow, 6:00 AM</p>
+              <p className="text-amber-900 text-sm font-medium">Your spark is ready!</p>
+            </div>
+            
+            <div className="hidden md:block absolute -right-4 top-1/3 bg-white rounded-2xl p-4 shadow-xl shadow-amber-100 border border-amber-100 transform rotate-3">
+              <p className="text-amber-600 text-xs font-medium mb-1">🧠 Today's theme</p>
+              <p className="text-amber-900 text-sm font-medium">Stoic Wisdom</p>
+            </div>
+          </div>
+        </div>
+
+        {/* How it works */}
+        <div className="bg-white border-y border-amber-100">
+          <div className="container mx-auto px-6 py-20 max-w-4xl">
+            <h2 className="text-center text-amber-500 text-sm font-semibold tracking-wide uppercase mb-12">
+              ✦ How it works ✦
+            </h2>
+            
+            <div className="grid md:grid-cols-3 gap-10">
+              {[
+                { 
+                  emoji: '🎨',
+                  title: 'Pick your vibe', 
+                  desc: 'Choose from Stoic wisdom, productivity tips, success mindset, or fitness motivation.' 
+                },
+                { 
+                  emoji: '🤖',
+                  title: 'AI creates magic', 
+                  desc: 'Every night, we generate a unique, beautiful wallpaper just for you.' 
+                },
+                { 
+                  emoji: '🌅',
+                  title: 'Wake up inspired', 
+                  desc: 'Open your inbox to a fresh perspective. One tap to make it your wallpaper.' 
+                },
+              ].map((item, i) => (
+                <div key={i} className="text-center">
+                  <div className="text-4xl mb-4">{item.emoji}</div>
+                  <h3 className="text-amber-900 font-semibold text-lg mb-2">{item.title}</h3>
+                  <p className="text-amber-700/70 text-sm leading-relaxed">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Pricing */}
+        <div className="container mx-auto px-6 py-20 max-w-lg">
+          <div className="bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-amber-200 rounded-3xl p-8 text-center shadow-xl shadow-amber-100">
+            <div className="inline-block px-3 py-1 bg-amber-200 text-amber-800 rounded-full text-xs font-semibold mb-4">
+              SIMPLE PRICING
+            </div>
+            <div className="flex items-baseline justify-center gap-1 mb-2">
+              <span className="text-5xl font-bold text-amber-900">$49</span>
+              <span className="text-amber-600">/year</span>
+            </div>
+            <p className="text-amber-700 mb-8">That's less than $1 per week ☕</p>
+            
+            <ul className="text-left space-y-3 mb-8">
+              {[
+                '🌅 Fresh AI wallpaper every morning',
+                '📚 100+ curated quotes across 4 themes',
+                '🎨 4 beautiful visual styles',
+                '⚡ iOS Shortcut for auto-set',
+                '💝 Cancel anytime, no questions',
+              ].map((item, i) => (
+                <li key={i} className="flex items-center gap-3 text-amber-800 text-sm">
+                  {item}
+                </li>
+              ))}
+            </ul>
+
+            <button
+              onClick={() => document.getElementById('signup')?.scrollIntoView({ behavior: 'smooth' })}
+              className="w-full py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold rounded-xl hover:from-amber-600 hover:to-orange-600 transition-all shadow-lg shadow-orange-200"
+            >
+              Start your 7-day free trial ☀️
+            </button>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <footer className="container mx-auto px-6 py-8 max-w-5xl border-t border-amber-100">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="flex items-center gap-2">
+              <span className="text-xl">☀️</span>
+              <span className="text-amber-700 text-sm font-medium">Daily Spark</span>
+            </div>
+            <p className="text-amber-600 text-sm">
+              Made with 💛 for people who believe in better mornings
+            </p>
+          </div>
+        </footer>
       </div>
     );
   }
@@ -262,38 +271,37 @@ export default function Home() {
   // Preferences step
   if (step === 'preferences') {
     return (
-      <div className="min-h-screen bg-stone-50">
+      <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
         <div className="container mx-auto px-6 py-12 max-w-lg">
           <button 
             onClick={() => setStep('landing')}
-            className="text-stone-500 hover:text-stone-900 mb-12 flex items-center gap-2 transition-colors"
+            className="text-amber-600 hover:text-amber-900 mb-10 flex items-center gap-2 transition-colors"
           >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" />
-            </svg>
-            Back
+            ← Back
           </button>
 
           <div className="mb-10">
-            <p className="text-stone-500 text-sm mb-1">{email}</p>
-            <h1 className="text-2xl font-semibold text-stone-900">Customize your Daily Spark</h1>
+            <p className="text-amber-600 text-sm mb-1">✉️ {email}</p>
+            <h1 className="text-2xl font-bold text-amber-900">Customize your Daily Spark ✨</h1>
           </div>
 
           {/* Category */}
           <div className="mb-8">
-            <label className="block text-sm font-medium text-stone-700 mb-3">What resonates with you?</label>
-            <div className="grid grid-cols-2 gap-2">
+            <label className="block text-sm font-semibold text-amber-800 mb-3">What inspires you?</label>
+            <div className="grid grid-cols-2 gap-3">
               {(['stoicism', 'productivity', 'success', 'fitness'] as Category[]).map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setCategory(cat)}
-                  className={`p-4 rounded-xl border text-left transition-all ${
+                  className={`p-4 rounded-xl border-2 text-left transition-all ${
                     category === cat
-                      ? 'border-amber-500 bg-amber-50 text-amber-900'
-                      : 'border-stone-200 bg-white text-stone-700 hover:border-stone-300'
+                      ? 'border-amber-500 bg-amber-50 shadow-md shadow-amber-100'
+                      : 'border-amber-100 bg-white hover:border-amber-200'
                   }`}
                 >
-                  <span className="text-sm font-medium">{categoryLabels[cat]}</span>
+                  <span className={`text-sm font-medium ${category === cat ? 'text-amber-900' : 'text-amber-700'}`}>
+                    {categoryLabels[cat]}
+                  </span>
                 </button>
               ))}
             </div>
@@ -301,19 +309,21 @@ export default function Home() {
 
           {/* Style */}
           <div className="mb-8">
-            <label className="block text-sm font-medium text-stone-700 mb-3">Visual style</label>
-            <div className="grid grid-cols-2 gap-2">
+            <label className="block text-sm font-semibold text-amber-800 mb-3">Visual style</label>
+            <div className="grid grid-cols-2 gap-3">
               {getAllStyles().map((s) => (
                 <button
                   key={s}
                   onClick={() => setStyle(s)}
-                  className={`p-4 rounded-xl border text-left transition-all ${
+                  className={`p-4 rounded-xl border-2 text-left transition-all ${
                     style === s
-                      ? 'border-amber-500 bg-amber-50 text-amber-900'
-                      : 'border-stone-200 bg-white text-stone-700 hover:border-stone-300'
+                      ? 'border-amber-500 bg-amber-50 shadow-md shadow-amber-100'
+                      : 'border-amber-100 bg-white hover:border-amber-200'
                   }`}
                 >
-                  <span className="text-sm font-medium">{styles[s].label}</span>
+                  <span className={`text-sm font-medium ${style === s ? 'text-amber-900' : 'text-amber-700'}`}>
+                    {styles[s].label}
+                  </span>
                 </button>
               ))}
             </div>
@@ -321,16 +331,16 @@ export default function Home() {
 
           {/* Time */}
           <div className="mb-10">
-            <label className="block text-sm font-medium text-stone-700 mb-3">Delivery time</label>
-            <div className="flex gap-2">
+            <label className="block text-sm font-semibold text-amber-800 mb-3">When should we deliver?</label>
+            <div className="flex gap-3">
               {['5am', '6am', '7am'].map((time) => (
                 <button
                   key={time}
                   onClick={() => setDeliveryTime(time)}
-                  className={`flex-1 py-3 rounded-xl border text-sm font-medium transition-all ${
+                  className={`flex-1 py-3 rounded-xl border-2 text-sm font-medium transition-all ${
                     deliveryTime === time
-                      ? 'border-amber-500 bg-amber-50 text-amber-900'
-                      : 'border-stone-200 bg-white text-stone-700 hover:border-stone-300'
+                      ? 'border-amber-500 bg-amber-50 text-amber-900 shadow-md shadow-amber-100'
+                      : 'border-amber-100 bg-white text-amber-700 hover:border-amber-200'
                   }`}
                 >
                   {time}
@@ -340,7 +350,7 @@ export default function Home() {
           </div>
 
           {error && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm">
+            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl text-red-600 text-sm">
               {error}
             </div>
           )}
@@ -348,19 +358,9 @@ export default function Home() {
           <button
             onClick={handleGeneratePreview}
             disabled={isLoading}
-            className="w-full py-3.5 bg-stone-900 text-white font-medium rounded-xl hover:bg-stone-800 transition-colors disabled:opacity-50"
+            className="w-full py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold rounded-xl hover:from-amber-600 hover:to-orange-600 transition-all disabled:opacity-50 shadow-lg shadow-orange-200"
           >
-            {isLoading ? (
-              <span className="flex items-center justify-center gap-2">
-                <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-                </svg>
-                Generating...
-              </span>
-            ) : (
-              'Preview your first wallpaper'
-            )}
+            {isLoading ? '✨ Creating your preview...' : 'Preview my first wallpaper →'}
           </button>
         </div>
       </div>
@@ -370,26 +370,22 @@ export default function Home() {
   // Preview step
   if (step === 'preview' && previewWallpaper) {
     return (
-      <div className="min-h-screen bg-stone-50">
+      <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
         <div className="container mx-auto px-6 py-12 max-w-lg">
           <button 
             onClick={() => setStep('preferences')}
-            className="text-stone-500 hover:text-stone-900 mb-12 flex items-center gap-2 transition-colors"
+            className="text-amber-600 hover:text-amber-900 mb-10 flex items-center gap-2 transition-colors"
           >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" />
-            </svg>
-            Change preferences
+            ← Change preferences
           </button>
 
-          <div className="mb-8">
-            <h1 className="text-2xl font-semibold text-stone-900 mb-2">Your first wallpaper</h1>
-            <p className="text-stone-500">This is what tomorrow morning looks like.</p>
+          <div className="mb-8 text-center">
+            <h1 className="text-2xl font-bold text-amber-900 mb-2">Your first Daily Spark! 🌅</h1>
+            <p className="text-amber-700">This is what tomorrow morning looks like</p>
           </div>
 
           {/* Phone preview */}
-          <div className="relative mx-auto w-[220px] aspect-[9/19] rounded-[2rem] bg-stone-900 p-2 shadow-xl mb-8">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-4 bg-stone-900 rounded-b-lg z-10" />
+          <div className="relative mx-auto w-[200px] aspect-[9/19] rounded-[2rem] bg-amber-900 p-2 shadow-2xl shadow-amber-200 mb-8">
             <div className="w-full h-full rounded-[1.5rem] overflow-hidden">
               <img
                 src={previewWallpaper.imageUrl}
@@ -400,13 +396,13 @@ export default function Home() {
           </div>
 
           {/* Quote */}
-          <div className="text-center mb-10 px-4">
-            <p className="text-stone-700 italic mb-2">"{previewWallpaper.quote}"</p>
-            <p className="text-stone-400 text-sm">— {previewWallpaper.author}</p>
+          <div className="text-center mb-10 px-4 py-6 bg-white rounded-2xl border border-amber-100 shadow-lg shadow-amber-50">
+            <p className="text-amber-900 italic mb-2">"{previewWallpaper.quote}"</p>
+            <p className="text-amber-600 text-sm">— {previewWallpaper.author}</p>
           </div>
 
           {error && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm">
+            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl text-red-600 text-sm">
               {error}
             </div>
           )}
@@ -416,21 +412,21 @@ export default function Home() {
             <button
               onClick={() => handleSubscribe('annual')}
               disabled={isLoading}
-              className="w-full py-3.5 bg-stone-900 text-white font-medium rounded-xl hover:bg-stone-800 transition-colors disabled:opacity-50"
+              className="w-full py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold rounded-xl hover:from-amber-600 hover:to-orange-600 transition-all disabled:opacity-50 shadow-lg shadow-orange-200"
             >
-              {isLoading ? 'Processing...' : 'Subscribe — $49/year'}
+              {isLoading ? 'Processing...' : 'Subscribe — $49/year ☀️'}
             </button>
             <button
               onClick={() => handleSubscribe('free')}
               disabled={isLoading}
-              className="w-full py-3.5 border border-stone-300 text-stone-700 font-medium rounded-xl hover:bg-stone-100 transition-colors disabled:opacity-50"
+              className="w-full py-4 border-2 border-amber-200 text-amber-700 font-semibold rounded-xl hover:bg-amber-50 transition-all disabled:opacity-50"
             >
               Start 7-day free trial
             </button>
           </div>
 
-          <p className="text-stone-400 text-sm text-center mt-6">
-            Delivered daily at {deliveryTime} · Cancel anytime
+          <p className="text-amber-500 text-sm text-center mt-6">
+            📬 Delivered daily at {deliveryTime} · Cancel anytime
           </p>
         </div>
       </div>
@@ -440,41 +436,34 @@ export default function Home() {
   // Success
   if (step === 'success') {
     return (
-      <div className="min-h-screen bg-stone-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white flex items-center justify-center">
         <div className="container mx-auto px-6 py-12 max-w-md text-center">
-          <div className="w-14 h-14 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-6">
-            <svg className="w-7 h-7 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-            </svg>
-          </div>
+          <div className="text-6xl mb-6">🎉</div>
           
-          <h1 className="text-2xl font-semibold text-stone-900 mb-3">You're all set</h1>
-          <p className="text-stone-500 mb-8">
+          <h1 className="text-2xl font-bold text-amber-900 mb-3">You're all set!</h1>
+          <p className="text-amber-700 mb-8">
             Your first wallpaper arrives tomorrow at {deliveryTime}.<br />
-            Check your inbox for a welcome email.
+            Check your inbox for a welcome email! 💌
           </p>
           
-          <div className="bg-white border border-stone-200 rounded-xl p-5 mb-8 text-left">
-            <h3 className="text-stone-900 font-medium mb-2">Want zero-tap automation?</h3>
-            <p className="text-stone-500 text-sm mb-3">
-              Our iOS Shortcut automatically sets your wallpaper every morning.
+          <div className="bg-white border-2 border-amber-100 rounded-2xl p-6 mb-8 text-left shadow-lg shadow-amber-50">
+            <h3 className="text-amber-900 font-semibold mb-2">⚡ Want zero-tap automation?</h3>
+            <p className="text-amber-700 text-sm mb-3">
+              Our iOS Shortcut sets your wallpaper automatically each morning.
             </p>
             <a 
               href="/shortcut"
-              className="inline-flex items-center gap-1 text-amber-600 text-sm font-medium hover:text-amber-700 transition-colors"
+              className="inline-flex items-center gap-1 text-amber-600 text-sm font-semibold hover:text-amber-800 transition-colors"
             >
-              Set up iOS Shortcut
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
+              Set up iOS Shortcut →
             </a>
           </div>
 
           <button
             onClick={() => setStep('landing')}
-            className="text-stone-500 hover:text-stone-900 transition-colors"
+            className="text-amber-600 hover:text-amber-900 transition-colors"
           >
-            Back to home
+            ← Back to home
           </button>
         </div>
       </div>
