@@ -39,10 +39,43 @@ export default function Home() {
     }
   };
 
-  const handleDownload = () => {
+  const [showSaveHint, setShowSaveHint] = useState(false);
+  const isIOS = typeof navigator !== 'undefined' && /iPad|iPhone|iPod/.test(navigator.userAgent);
+  const isMobile = typeof navigator !== 'undefined' && /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+  const handleDownload = async () => {
     if (!wallpaper?.imageUrl) return;
     
-    // For data URLs, we can download directly
+    // Try Web Share API first (works great on mobile)
+    if (isMobile && navigator.share && navigator.canShare) {
+      try {
+        const response = await fetch(wallpaper.imageUrl);
+        const blob = await response.blob();
+        const file = new File([blob], `daily-spark-${category}-${style}.png`, { type: 'image/png' });
+        
+        if (navigator.canShare({ files: [file] })) {
+          await navigator.share({
+            files: [file],
+            title: 'Daily Spark Wallpaper',
+            text: `"${wallpaper.quote}" — ${wallpaper.author}`,
+          });
+          return;
+        }
+      } catch (err) {
+        // Fall through to regular download
+        console.log('Share failed, falling back to download');
+      }
+    }
+    
+    // For iOS, show hint since download attribute doesn't work
+    if (isIOS) {
+      setShowSaveHint(true);
+      // Open image in new tab for long-press saving
+      window.open(wallpaper.imageUrl, '_blank');
+      return;
+    }
+    
+    // Regular download for desktop/Android
     const a = document.createElement('a');
     a.href = wallpaper.imageUrl;
     a.download = `daily-spark-${category}-${style}.png`;
@@ -147,12 +180,26 @@ export default function Home() {
               />
             </div>
 
+            {/* iOS Save Hint */}
+            {showSaveHint && (
+              <div className="p-4 bg-blue-500/20 border border-blue-500 rounded-xl text-blue-200 text-sm">
+                <p className="font-medium mb-1">📱 To save on iPhone:</p>
+                <p>Long-press the image → tap &quot;Add to Photos&quot;</p>
+                <button 
+                  onClick={() => setShowSaveHint(false)}
+                  className="mt-2 text-blue-300 hover:text-blue-100"
+                >
+                  Got it ✓
+                </button>
+              </div>
+            )}
+
             <div className="flex gap-3">
               <button
                 onClick={handleDownload}
                 className="flex-1 py-3 px-6 bg-white text-zinc-900 font-semibold rounded-xl hover:bg-zinc-100 transition-colors"
               >
-                📥 Download
+                {isMobile ? '📤 Save' : '📥 Download'}
               </button>
               <button
                 onClick={handleGenerate}
@@ -162,6 +209,13 @@ export default function Home() {
                 🔄 New Quote
               </button>
             </div>
+
+            {/* Mobile tip */}
+            {isMobile && !showSaveHint && (
+              <p className="text-center text-zinc-500 text-sm">
+                After saving, go to Settings → Wallpaper to set it
+              </p>
+            )}
           </div>
         )}
 
