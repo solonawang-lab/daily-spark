@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     description: "The first thing you see shapes your day.",
   },
   viewport: "width=device-width, initial-scale=1, viewport-fit=cover",
-  themeColor: "#0a0a0b",
+  themeColor: "#fafaf9",
 };
 
 export default function RootLayout({
@@ -34,7 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className="font-sans antialiased bg-[#0a0a0b] text-white selection:bg-amber-500/30 selection:text-white">
+      <body className="font-sans antialiased">
         {children}
       </body>
     </html>

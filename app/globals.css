@@ -10,8 +10,8 @@ html {
 }
 
 body {
-  background: #0a0a0b;
-  color: #fafafa;
+  background: #fafaf9;
+  color: #1c1917;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -27,12 +27,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #27272a;
+  background: #d6d3d1;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #3f3f46;
+  background: #a8a29e;
 }
 
 /* Focus styles */
@@ -41,36 +41,8 @@ body {
   outline-offset: 2px;
 }
 
-/* Animation utilities */
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes pulse-slow {
-  0%, 100% {
-    opacity: 0.15;
-  }
-  50% {
-    opacity: 0.25;
-  }
-}
-
-.animate-fade-in {
-  animation: fade-in 0.6s ease-out forwards;
-}
-
-.animate-pulse-slow {
-  animation: pulse-slow 4s ease-in-out infinite;
-}
-
-/* Typography */
-.text-balance {
-  text-wrap: balance;
+/* Selection */
+::selection {
+  background: #fef3c7;
+  color: #1c1917;
 }
