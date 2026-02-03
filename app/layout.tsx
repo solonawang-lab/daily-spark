@@ -1,31 +1,30 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
-  title: "Daily Spark ✨ | AI Wallpapers with Inspiring Quotes",
-  description: "Wake up to a fresh, AI-generated wallpaper with an inspiring quote every morning. Stoicism, productivity, fitness & more.",
-  keywords: ["wallpaper", "quotes", "motivation", "AI", "stoicism", "productivity"],
+  title: "Daily Spark — Wake up inspired",
+  description: "A premium wallpaper with a curated quote, generated fresh and delivered to your inbox every morning. For people who take mornings seriously.",
+  keywords: ["wallpaper", "quotes", "morning routine", "AI", "stoicism", "productivity", "motivation"],
+  authors: [{ name: "Daily Spark" }],
   openGraph: {
-    title: "Daily Spark ✨",
-    description: "AI-generated wallpapers with inspiring quotes",
+    title: "Daily Spark — Wake up inspired",
+    description: "A premium wallpaper with a curated quote, delivered every morning.",
     type: "website",
+    siteName: "Daily Spark",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Daily Spark ✨",
-    description: "AI-generated wallpapers with inspiring quotes",
+    title: "Daily Spark",
+    description: "The first thing you see shapes your day.",
   },
+  viewport: "width=device-width, initial-scale=1, viewport-fit=cover",
+  themeColor: "#0a0a0b",
 };
 
 export default function RootLayout({
@@ -34,10 +33,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang="en" className={inter.variable}>
+      <body className="font-sans antialiased bg-[#0a0a0b] text-white selection:bg-amber-500/30 selection:text-white">
         {children}
       </body>
     </html>

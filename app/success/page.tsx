@@ -9,63 +9,100 @@ function SuccessContent() {
   const sessionId = searchParams.get('session_id');
 
   return (
-    <div className="min-h-screen bg-zinc-950 flex items-center justify-center">
-      <div className="container mx-auto px-4 py-12 max-w-xl text-center">
-        <div className="text-6xl mb-6">🎉</div>
-        <h1 className="text-3xl font-bold text-white mb-4">Welcome to Daily Spark!</h1>
-        <p className="text-zinc-400 mb-8">
-          Your subscription is now active. Your first wallpaper will arrive tomorrow morning.
-        </p>
-        
-        <div className="bg-zinc-900 rounded-2xl p-6 mb-8 text-left">
-          <h3 className="text-white font-semibold mb-4">What happens next:</h3>
-          <ul className="space-y-3 text-zinc-400">
-            <li className="flex items-start gap-3">
-              <span className="text-amber-500">✓</span>
-              <span>Check your inbox for a welcome email with your first wallpaper</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="text-amber-500">✓</span>
-              <span>Every morning at your selected time, you'll receive a fresh wallpaper</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="text-amber-500">✓</span>
-              <span>Long-press the image in the email to save, then set as your wallpaper</span>
-            </li>
-          </ul>
+    <div className="min-h-screen bg-[#0a0a0b]">
+      {/* Ambient background */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute w-[500px] h-[500px] -top-32 left-1/2 -translate-x-1/2 bg-amber-500 rounded-full blur-3xl opacity-10" />
+      </div>
+
+      <div className="relative z-10 container mx-auto px-6 py-20 max-w-lg">
+        <div className="text-center mb-12">
+          <div className="w-20 h-20 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center mx-auto mb-8">
+            <svg className="w-10 h-10 text-zinc-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          
+          <h1 className="text-3xl font-semibold text-white mb-4">Welcome to Daily Spark</h1>
+          <p className="text-zinc-400 text-lg">
+            Your subscription is active. Tomorrow starts different.
+          </p>
         </div>
 
-        <div className="bg-zinc-900/50 border border-zinc-800 rounded-2xl p-6 mb-8">
-          <h3 className="text-white font-semibold mb-3">⚡ Want zero-tap automation?</h3>
+        <div className="space-y-4 mb-12">
+          <div className="bg-zinc-900/50 border border-zinc-800/50 rounded-2xl p-5">
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 rounded-xl bg-zinc-800 flex items-center justify-center flex-shrink-0">
+                <svg className="w-5 h-5 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-white font-medium mb-1">Check your inbox</h3>
+                <p className="text-zinc-500 text-sm">We sent a welcome email with your first wallpaper preview.</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-zinc-900/50 border border-zinc-800/50 rounded-2xl p-5">
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 rounded-xl bg-zinc-800 flex items-center justify-center flex-shrink-0">
+                <svg className="w-5 h-5 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-white font-medium mb-1">Tomorrow morning</h3>
+                <p className="text-zinc-500 text-sm">Your first AI-generated wallpaper arrives before you wake up.</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-zinc-900/50 border border-zinc-800/50 rounded-2xl p-5">
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 rounded-xl bg-zinc-800 flex items-center justify-center flex-shrink-0">
+                <svg className="w-5 h-5 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-white font-medium mb-1">Save & set</h3>
+                <p className="text-zinc-500 text-sm">Long-press the image in the email, save to photos, set as wallpaper.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-br from-zinc-900 to-zinc-900/50 border border-zinc-800/50 rounded-2xl p-6">
+          <h3 className="text-white font-medium mb-2">Want it fully automated?</h3>
           <p className="text-zinc-500 text-sm mb-4">
-            Download our iOS Shortcut to automatically set your wallpaper every morning — completely hands-free.
+            Our iOS Shortcut fetches and sets your wallpaper automatically — zero taps required.
           </p>
           <Link 
             href="/shortcut"
-            className="inline-block px-6 py-2 border border-zinc-700 text-zinc-300 rounded-xl hover:bg-zinc-800 transition-colors"
+            className="inline-flex items-center gap-2 text-amber-400 text-sm font-medium hover:text-amber-300 transition-colors"
           >
-            Get iOS Shortcut
+            Set up automation
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
           </Link>
         </div>
 
-        <div className="space-y-4">
+        <div className="mt-12 text-center">
           <Link
             href="/"
-            className="block w-full py-3 px-6 bg-zinc-800 text-white font-medium rounded-xl hover:bg-zinc-700 transition-colors"
+            className="text-zinc-600 hover:text-white transition-colors"
           >
-            Back to Home
+            Back to home
           </Link>
           
-          <p className="text-zinc-600 text-sm">
-            Questions? Reply to any Daily Spark email and we'll help.
-          </p>
+          {sessionId && (
+            <p className="text-zinc-800 text-xs mt-6 font-mono">
+              {sessionId.slice(0, 24)}...
+            </p>
+          )}
         </div>
-
-        {sessionId && (
-          <p className="text-zinc-700 text-xs mt-8">
-            Order ID: {sessionId.slice(0, 20)}...
-          </p>
-        )}
       </div>
     </div>
   );
@@ -74,8 +111,8 @@ function SuccessContent() {
 export default function SuccessPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-zinc-950 flex items-center justify-center">
-        <div className="text-white">Loading...</div>
+      <div className="min-h-screen bg-[#0a0a0b] flex items-center justify-center">
+        <div className="w-6 h-6 border-2 border-zinc-700 border-t-zinc-400 rounded-full animate-spin" />
       </div>
     }>
       <SuccessContent />
