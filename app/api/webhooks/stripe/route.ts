@@ -3,7 +3,14 @@ import Stripe from 'stripe';
 import { promises as fs } from 'fs';
 import path from 'path';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '');
+// Lazy initialization to avoid build-time errors when API key is not set
+let stripeClient: Stripe | null = null;
+function getStripeClient(): Stripe {
+  if (!stripeClient) {
+    stripeClient = new Stripe(process.env.STRIPE_SECRET_KEY || '');
+  }
+  return stripeClient;
+}
 
 const SUBSCRIBERS_FILE = path.join(process.cwd(), 'data', 'subscribers.json');
 
@@ -44,7 +51,7 @@ export async function POST(request: NextRequest) {
   let event: Stripe.Event;
 
   try {
-    event = stripe.webhooks.constructEvent(
+    event = getStripeClient().webhooks.constructEvent(
       body,
       signature,
       process.env.STRIPE_WEBHOOK_SECRET || ''
