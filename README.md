@@ -2,7 +2,7 @@
 
 > Wake up to a fresh, AI-generated wallpaper with an inspiring quote every morning.
 
-[![CI](https://github.com/YOUR_USERNAME/daily-spark/actions/workflows/ci.yml/badge.svg)](https://github.com/YOUR_USERNAME/daily-spark/actions/workflows/ci.yml)
+[![CI](https://github.com/solonawang-lab/daily-spark/actions/workflows/ci.yml/badge.svg)](https://github.com/solonawang-lab/daily-spark/actions/workflows/ci.yml)
 
 **Project #1** of the 26-in-52 indie hacker challenge.
 
@@ -18,7 +18,7 @@
 
 ```bash
 # Clone the repo
-git clone https://github.com/YOUR_USERNAME/daily-spark.git
+git clone https://github.com/solonawang-lab/daily-spark.git
 cd daily-spark
 
 # Install dependencies
