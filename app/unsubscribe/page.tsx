@@ -11,27 +11,15 @@ function UnsubscribeContent() {
   const [message, setMessage] = useState('');
 
   const handleUnsubscribe = async () => {
-    if (!email) {
-      setStatus('error');
-      setMessage('No email provided');
-      return;
-    }
-
+    if (!email) { setStatus('error'); setMessage('No email'); return; }
     setStatus('loading');
-
     try {
       const response = await fetch('/api/unsubscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
       });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to unsubscribe');
-      }
-
+      if (!response.ok) throw new Error((await response.json()).error || 'Failed');
       setStatus('success');
     } catch (error) {
       setStatus('error');
@@ -41,67 +29,38 @@ function UnsubscribeContent() {
 
   if (status === 'success') {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white flex items-center justify-center">
-        <div className="container mx-auto px-6 py-12 max-w-md text-center">
-          <div className="text-5xl mb-6">👋</div>
-          
-          <h1 className="text-xl font-bold text-amber-900 mb-3">You've been unsubscribed</h1>
-          <p className="text-amber-700 mb-8">
-            We're sad to see you go! If you ever want to start your mornings inspired again, we'll be here ☀️
-          </p>
-          
-          <Link
-            href="/"
-            className="inline-block px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold rounded-xl hover:from-amber-600 hover:to-orange-600 transition-all shadow-md"
-          >
-            Back to home
-          </Link>
+      <div className="min-h-screen bg-[#FAFBFF] flex items-center justify-center">
+        <div className="container mx-auto px-6 py-12 max-w-sm text-center">
+          <div className="w-14 h-14 rounded-full bg-slate-100 flex items-center justify-center mx-auto mb-6">
+            <svg className="w-6 h-6 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <h1 className="text-xl font-bold text-slate-900 mb-3">Unsubscribed</h1>
+          <p className="text-slate-500 mb-8">You won't receive any more emails.</p>
+          <Link href="/" className="inline-block px-5 py-2.5 bg-slate-900 text-white rounded-lg hover:bg-slate-800">Back to home</Link>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white flex items-center justify-center">
-      <div className="container mx-auto px-6 py-12 max-w-md text-center">
-        <div className="text-5xl mb-6">😢</div>
-
-        <h1 className="text-xl font-bold text-amber-900 mb-3">Unsubscribe</h1>
-        
+    <div className="min-h-screen bg-[#FAFBFF] flex items-center justify-center">
+      <div className="container mx-auto px-6 py-12 max-w-sm text-center">
+        <h1 className="text-xl font-bold text-slate-900 mb-3">Unsubscribe</h1>
         {email ? (
           <>
-            <p className="text-amber-700 mb-8">
-              Are you sure? You'll stop receiving Daily Spark emails at<br />
-              <span className="font-semibold text-amber-900">{email}</span>
-            </p>
-            
-            {status === 'error' && (
-              <div className="mb-6 p-4 bg-red-50 border-2 border-red-200 rounded-xl text-red-600 text-sm">
-                {message}
-              </div>
-            )}
-
+            <p className="text-slate-500 mb-8">Stop receiving emails at <span className="text-slate-700">{email}</span>?</p>
+            {status === 'error' && <div className="mb-6 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">{message}</div>}
             <div className="space-y-3">
-              <button
-                onClick={handleUnsubscribe}
-                disabled={status === 'loading'}
-                className="w-full py-3 bg-amber-200 text-amber-800 font-semibold rounded-xl hover:bg-amber-300 transition-colors disabled:opacity-50"
-              >
-                {status === 'loading' ? 'Processing...' : 'Yes, unsubscribe me'}
+              <button onClick={handleUnsubscribe} disabled={status === 'loading'} className="w-full py-3 bg-slate-200 text-slate-700 font-medium rounded-lg hover:bg-slate-300 disabled:opacity-50">
+                {status === 'loading' ? 'Processing...' : 'Unsubscribe'}
               </button>
-              
-              <Link
-                href="/"
-                className="block w-full py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold rounded-xl hover:from-amber-600 hover:to-orange-600 transition-all shadow-md"
-              >
-                No, keep sending me sparks! ☀️
-              </Link>
+              <Link href="/" className="block w-full py-3 bg-slate-900 text-white font-medium rounded-lg hover:bg-slate-800">Keep subscription</Link>
             </div>
           </>
         ) : (
-          <p className="text-amber-700">
-            Invalid link. Please use the link from your Daily Spark email.
-          </p>
+          <p className="text-slate-500">Invalid link.</p>
         )}
       </div>
     </div>
@@ -110,11 +69,7 @@ function UnsubscribeContent() {
 
 export default function UnsubscribePage() {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white flex items-center justify-center">
-        <div className="text-amber-500 text-2xl">☀️</div>
-      </div>
-    }>
+    <Suspense fallback={<div className="min-h-screen bg-[#FAFBFF] flex items-center justify-center"><div className="w-5 h-5 border-2 border-slate-200 border-t-indigo-500 rounded-full animate-spin" /></div>}>
       <UnsubscribeContent />
     </Suspense>
   );
