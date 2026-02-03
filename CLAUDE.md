@@ -96,6 +96,30 @@ Before committing:
 ### Change AI model
 Edit `lib/replicate.ts` — change the model ID in `replicate.run()`
 
+## Custom Commands
+
+Use these slash commands for structured workflows:
+
+| Command | Purpose |
+|---------|---------|
+| `/plan` | Create implementation plan before coding |
+| `/review` | Code review with severity levels |
+| `/simplify` | Reduce code complexity |
+| `/brainstorm` | Generate and compare options |
+| `/debug` | Systematic debugging workflow |
+| `/worktree` | Parallel development with git worktrees |
+
+## Custom Agents
+
+Switch agents for specialized tasks:
+
+```bash
+claude --agent planner "Add Stripe payments"
+claude --agent reviewer "Review the API routes"
+claude --agent simplifier "Simplify lib/overlay.ts"
+claude --agent debugger "Fix the download button on mobile"
+```
+
 ## Troubleshooting
 - **Build fails on canvas:** May need system deps: `brew install pkg-config cairo pango libpng jpeg giflib librsvg`
 - **Replicate 402:** Need to add billing at replicate.com/account/billing

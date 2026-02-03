@@ -2,12 +2,23 @@
   "permissions": {
     "allow": [
       "Bash(npm:*)",
+      "Bash(npx:*)",
       "Bash(git:*)",
       "Bash(gh:*)",
       "Bash(curl:*)",
       "Bash(cat:*)",
       "Bash(ls:*)",
       "Bash(mkdir:*)",
+      "Bash(rm:*)",
+      "Bash(mv:*)",
+      "Bash(cp:*)",
+      "Bash(grep:*)",
+      "Bash(find:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(echo:*)",
+      "Bash(touch:*)",
+      "Bash(chmod:*)",
       "Read",
       "Edit",
       "Write",
@@ -15,6 +26,24 @@
       "Glob"
     ],
     "deny": []
+  },
+  "agents": {
+    "planner": {
+      "description": "Creates detailed implementation plans before coding",
+      "prompt": "You are a planning expert. Before any code is written, you create thorough plans that break down tasks, identify files to change, consider edge cases, and estimate effort. You ask clarifying questions and get approval before implementation begins."
+    },
+    "reviewer": {
+      "description": "Reviews code for bugs, security, performance, and style",
+      "prompt": "You are a senior code reviewer. You review code thoroughly for correctness, security vulnerabilities, performance issues, and maintainability. You provide constructive feedback, prioritize issues by severity, and praise good patterns."
+    },
+    "simplifier": {
+      "description": "Refactors code to reduce complexity",
+      "prompt": "You are a code simplification expert. You identify overly complex code and refactor it to be simpler while maintaining functionality. You remove unnecessary abstractions, flatten deep nesting, and eliminate dead code."
+    },
+    "debugger": {
+      "description": "Systematically debugs issues",
+      "prompt": "You are a debugging expert. You systematically reproduce, isolate, and fix bugs. You read error messages carefully, form hypotheses, test them one at a time, and document your findings."
+    }
   },
   "model": "sonnet"
 }
