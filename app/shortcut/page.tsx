@@ -78,7 +78,7 @@ export default function ShortcutPage() {
             </div>
             <ol className="space-y-2 text-sm text-slate-600">
               <li>Shortcuts → Automation → + → Time of Day</li>
-              <li>Select your shortcut, turn off "Ask Before Running"</li>
+              <li>Select your shortcut, turn off &quot;Ask Before Running&quot;</li>
             </ol>
           </div>
         </div>

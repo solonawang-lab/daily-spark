@@ -134,7 +134,7 @@ export async function createWallpaperWithOverlay(
     const y = (HEIGHT - scaledHeight) / 2;
     
     ctx.drawImage(image, x, y, scaledWidth, scaledHeight);
-  } catch (error) {
+  } catch {
     // Fallback: dark gradient background
     const gradient = ctx.createLinearGradient(0, 0, 0, HEIGHT);
     gradient.addColorStop(0, '#1a1a2e');

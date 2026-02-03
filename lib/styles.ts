@@ -43,7 +43,7 @@ export function getAllStyles(): Style[] {
   return ['minimalist', 'nature', 'dark', 'vibrant'];
 }
 
-export function getStylePrompt(style: Style, category: string): string {
+export function getStylePrompt(style: Style, _category: string): string {
   const basePrompt = styles[style].prompt;
   return `${basePrompt}, phone wallpaper, 9:16 aspect ratio, space for text in center, high quality, 4k, aesthetic`;
 }

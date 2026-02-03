@@ -16,6 +16,15 @@ body {
 }
 
 ::selection {
-  background: #E0E7FF;
-  color: #312E81;
+  background: #D1FAE5;
+  color: #065F46;
+}
+
+/* Hide scrollbar for carousel */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }

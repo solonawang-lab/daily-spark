@@ -30,7 +30,7 @@ async function getSubscribers(): Promise<Subscriber[]> {
 // API endpoint for iOS Shortcut to fetch today's wallpaper
 export async function GET(request: NextRequest) {
   const email = request.nextUrl.searchParams.get('email');
-  const token = request.nextUrl.searchParams.get('token');
+  const _token = request.nextUrl.searchParams.get('token');
   
   // Simple token auth (in production, use proper API keys)
   if (!email) {

@@ -37,7 +37,7 @@ function UnsubscribeContent() {
             </svg>
           </div>
           <h1 className="text-xl font-bold text-slate-900 mb-3">Unsubscribed</h1>
-          <p className="text-slate-500 mb-8">You won't receive any more emails.</p>
+          <p className="text-slate-500 mb-8">You won&apos;t receive any more emails.</p>
           <Link href="/" className="inline-block px-5 py-2.5 bg-slate-900 text-white rounded-lg hover:bg-slate-800">Back to home</Link>
         </div>
       </div>

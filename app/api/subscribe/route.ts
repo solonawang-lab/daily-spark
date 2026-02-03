@@ -57,7 +57,8 @@ export async function POST(request: NextRequest) {
         console.warn('Stripe not configured, starting free trial instead');
       } else {
         // Create Stripe checkout session
-        const stripe = require('stripe')(stripeKey);
+        const Stripe = (await import('stripe')).default;
+        const stripe = new Stripe(stripeKey);
         
         const session = await stripe.checkout.sessions.create({
           payment_method_types: ['card'],

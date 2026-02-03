@@ -22,13 +22,13 @@ export async function GET(request: NextRequest) {
     // Summary stats
     const stats = {
       total: subscribers.length,
-      active: subscribers.filter((s: any) => s.status === 'active').length,
-      trial: subscribers.filter((s: any) => s.status === 'trial').length,
-      cancelled: subscribers.filter((s: any) => s.status === 'cancelled').length,
+      active: subscribers.filter((s: { status: string }) => s.status === 'active').length,
+      trial: subscribers.filter((s: { status: string }) => s.status === 'trial').length,
+      cancelled: subscribers.filter((s: { status: string }) => s.status === 'cancelled').length,
     };
 
     return NextResponse.json({ stats, subscribers });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ stats: { total: 0 }, subscribers: [] });
   }
 }
