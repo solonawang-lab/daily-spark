@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm:*)",
+      "Bash(git:*)",
+      "Bash(gh:*)",
+      "Bash(curl:*)",
+      "Bash(cat:*)",
+      "Bash(ls:*)",
+      "Bash(mkdir:*)",
+      "Read",
+      "Edit",
+      "Write",
+      "Grep",
+      "Glob"
+    ],
+    "deny": []
+  },
+  "model": "sonnet"
+}
