@@ -1,13 +1,82 @@
-import { createCanvas, loadImage, CanvasRenderingContext2D } from 'canvas';
+import { createCanvas, loadImage, registerFont, CanvasRenderingContext2D } from 'canvas';
+import path from 'path';
+import { Category } from './quotes';
 
 // Image dimensions for phone wallpaper (iPhone 14 Pro)
 const WIDTH = 1170;
 const HEIGHT = 2532;
 
+// Register all fonts (bundled with project)
+const fontsDir = path.join(process.cwd(), 'fonts');
+
+const FONTS = {
+  'Inter-SemiBold': 'Inter-SemiBold.ttf',
+  'Inter-Regular': 'Inter-Regular.ttf',
+  'PlayfairDisplay-Bold': 'PlayfairDisplay-Bold.ttf',
+  'PlayfairDisplay-Regular': 'PlayfairDisplay-Regular.ttf',
+  'BebasNeue-Regular': 'BebasNeue-Regular.ttf',
+  'Oswald-SemiBold': 'Oswald-SemiBold.ttf',
+};
+
+try {
+  for (const [family, file] of Object.entries(FONTS)) {
+    registerFont(path.join(fontsDir, file), { family });
+  }
+  console.log('Registered all fonts');
+} catch (e) {
+  console.warn('Failed to register fonts:', e);
+}
+
+// Font configurations per category
+interface FontConfig {
+  quoteFont: string;
+  authorFont: string;
+  quoteSize: number;
+  authorSize: number;
+  lineHeight: number;
+  uppercase: boolean;
+}
+
+const FONT_CONFIGS: Record<Category, FontConfig> = {
+  stoicism: {
+    quoteFont: 'PlayfairDisplay-Bold',
+    authorFont: 'PlayfairDisplay-Regular',
+    quoteSize: 64,
+    authorSize: 34,
+    lineHeight: 1.4,
+    uppercase: false,
+  },
+  productivity: {
+    quoteFont: 'Inter-SemiBold',
+    authorFont: 'Inter-Regular',
+    quoteSize: 62,
+    authorSize: 32,
+    lineHeight: 1.5,
+    uppercase: false,
+  },
+  success: {
+    quoteFont: 'BebasNeue-Regular',
+    authorFont: 'Inter-Regular',
+    quoteSize: 82,
+    authorSize: 34,
+    lineHeight: 1.2,
+    uppercase: true,
+  },
+  fitness: {
+    quoteFont: 'Oswald-SemiBold',
+    authorFont: 'Inter-Regular',
+    quoteSize: 72,
+    authorSize: 32,
+    lineHeight: 1.3,
+    uppercase: true,
+  },
+};
+
 interface OverlayOptions {
   imageUrl: string;
   quote: string;
   author: string;
+  category: Category;
   textColor?: string;
   shadowColor?: string;
 }
@@ -43,7 +112,11 @@ function wrapText(
 export async function createWallpaperWithOverlay(
   options: OverlayOptions
 ): Promise<Buffer> {
-  const { imageUrl, quote, author, textColor = '#ffffff', shadowColor = 'rgba(0,0,0,0.7)' } = options;
+  const { imageUrl, quote, author, category, textColor = '#ffffff', shadowColor = 'rgba(0,0,0,0.8)' } = options;
+
+  // Get font config for this category
+  const fontConfig = FONT_CONFIGS[category] || FONT_CONFIGS.productivity;
+  const { quoteFont, authorFont, quoteSize, authorSize, lineHeight, uppercase } = fontConfig;
 
   // Create canvas
   const canvas = createCanvas(WIDTH, HEIGHT);
@@ -70,51 +143,47 @@ export async function createWallpaperWithOverlay(
     ctx.fillRect(0, 0, WIDTH, HEIGHT);
   }
 
-  // Add slight dark overlay for better text readability
+  // Add subtle dark overlay - enough for readability, light enough to show image
   ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
   ctx.fillRect(0, 0, WIDTH, HEIGHT);
 
-  // Configure text style for quote
-  const quoteFontSize = 64;
-  const authorFontSize = 36;
-  const maxTextWidth = WIDTH * 0.8;
-  const lineHeight = quoteFontSize * 1.4;
+  // Calculate sizes based on font config
+  const actualLineHeight = quoteSize * lineHeight;
+  const MAX_TEXT_WIDTH = WIDTH * 0.82;
 
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
 
-  // Draw quote with word wrap
-  ctx.font = `bold ${quoteFontSize}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
+  // Set quote font
+  ctx.font = `${quoteSize}px "${quoteFont}", sans-serif`;
   
-  const quoteText = `"${quote}"`;
-  const lines = wrapText(ctx, quoteText, maxTextWidth);
+  // Apply uppercase if configured (for impact fonts like Bebas/Oswald)
+  const displayQuote = uppercase ? quote.toUpperCase() : quote;
+  const lines = wrapText(ctx, displayQuote, MAX_TEXT_WIDTH);
   
-  // Calculate vertical position (center)
-  const totalTextHeight = lines.length * lineHeight + authorFontSize + 40;
-  let startY = (HEIGHT - totalTextHeight) / 2;
+  // Calculate vertical position (golden ratio - slightly above center)
+  const totalTextHeight = lines.length * actualLineHeight + authorSize + 80;
+  const goldenRatio = 0.38;
+  let startY = HEIGHT * goldenRatio - totalTextHeight / 2;
 
-  // Draw each line with shadow
+  // Draw each line with subtle shadow
   for (const line of lines) {
-    // Shadow
     ctx.fillStyle = shadowColor;
     ctx.fillText(line, WIDTH / 2 + 3, startY + 3);
     
-    // Text
     ctx.fillStyle = textColor;
     ctx.fillText(line, WIDTH / 2, startY);
     
-    startY += lineHeight;
+    startY += actualLineHeight;
   }
 
   // Draw author
-  ctx.font = `${authorFontSize}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
-  startY += 30;
+  ctx.font = `${authorSize}px "${authorFont}", sans-serif`;
+  startY += 40;
   
-  // Shadow
   ctx.fillStyle = shadowColor;
   ctx.fillText(`— ${author}`, WIDTH / 2 + 2, startY + 2);
   
-  // Text
   ctx.fillStyle = textColor;
   ctx.fillText(`— ${author}`, WIDTH / 2, startY);
 

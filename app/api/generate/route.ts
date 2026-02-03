@@ -33,11 +33,12 @@ export async function POST(request: NextRequest) {
     // Get style colors
     const styleConfig = styles[style];
 
-    // Create wallpaper with quote overlay
+    // Create wallpaper with quote overlay (font varies by category)
     const wallpaperBuffer = await createWallpaperWithOverlay({
       imageUrl,
       quote: quote.text,
       author: quote.author,
+      category,
       textColor: styleConfig.textColor,
       shadowColor: styleConfig.shadowColor,
     });
