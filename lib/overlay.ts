@@ -75,10 +75,10 @@ export async function createWallpaperWithOverlay(
   ctx.fillRect(0, 0, WIDTH, HEIGHT);
 
   // Configure text style for quote
-  const quoteFontSize = 64;
-  const authorFontSize = 36;
-  const maxTextWidth = WIDTH * 0.8;
-  const lineHeight = quoteFontSize * 1.4;
+  const quoteFontSize = 96;  // Increased from 64
+  const authorFontSize = 52; // Increased from 36
+  const maxTextWidth = WIDTH * 0.85;
+  const lineHeight = quoteFontSize * 1.35;
 
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
@@ -95,9 +95,9 @@ export async function createWallpaperWithOverlay(
 
   // Draw each line with shadow
   for (const line of lines) {
-    // Shadow
+    // Shadow (larger offset for bigger text)
     ctx.fillStyle = shadowColor;
-    ctx.fillText(line, WIDTH / 2 + 3, startY + 3);
+    ctx.fillText(line, WIDTH / 2 + 4, startY + 4);
     
     // Text
     ctx.fillStyle = textColor;
@@ -108,11 +108,11 @@ export async function createWallpaperWithOverlay(
 
   // Draw author
   ctx.font = `${authorFontSize}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
-  startY += 30;
+  startY += 50;  // More space before author
   
   // Shadow
   ctx.fillStyle = shadowColor;
-  ctx.fillText(`— ${author}`, WIDTH / 2 + 2, startY + 2);
+  ctx.fillText(`— ${author}`, WIDTH / 2 + 3, startY + 3);
   
   // Text
   ctx.fillStyle = textColor;
