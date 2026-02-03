@@ -1,36 +1,112 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Daily Spark ✨
 
-## Getting Started
+> Wake up to a fresh, AI-generated wallpaper with an inspiring quote every morning.
 
-First, run the development server:
+[![CI](https://github.com/YOUR_USERNAME/daily-spark/actions/workflows/ci.yml/badge.svg)](https://github.com/YOUR_USERNAME/daily-spark/actions/workflows/ci.yml)
+
+**Project #1** of the 26-in-52 indie hacker challenge.
+
+## Features
+
+- 🎨 **4 Visual Styles:** Minimalist, Nature, Dark, Vibrant
+- 📚 **4 Quote Categories:** Stoicism, Productivity, Success, Fitness
+- 🤖 **AI-Generated Images:** Powered by FLUX Schnell via Replicate
+- 📱 **Phone-Optimized:** 1170x2532 resolution (iPhone 14 Pro)
+- 💾 **One-Click Download:** Save directly to your phone
+
+## Quick Start
 
 ```bash
+# Clone the repo
+git clone https://github.com/YOUR_USERNAME/daily-spark.git
+cd daily-spark
+
+# Install dependencies
+npm install
+
+# Set up environment
+cp .env.example .env.local
+# Edit .env.local with your API keys
+
+# Run dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Layer | Technology |
+|-------|------------|
+| Framework | Next.js 16 |
+| Styling | Tailwind CSS |
+| AI Images | Replicate (FLUX Schnell) |
+| Image Processing | node-canvas |
+| Hosting | Vercel |
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+daily-spark/
+├── app/
+│   ├── page.tsx              # Main UI
+│   ├── layout.tsx            # Root layout
+│   └── api/generate/         # Generation API
+├── lib/
+│   ├── quotes.ts             # Quote library
+│   ├── styles.ts             # Style configs
+│   ├── replicate.ts          # AI image generation
+│   └── overlay.ts            # Text overlay
+├── data/
+│   └── quotes.json           # 40 curated quotes
+├── .github/
+│   ├── workflows/ci.yml      # CI pipeline
+│   ├── pull_request_template.md
+│   └── ISSUE_TEMPLATE/
+├── BUSINESS-PLAN.md          # Revenue & growth strategy
+├── DEPLOYMENT-PLAN.md        # Hosting & China support
+├── MVP-SPEC.md               # Product specification
+└── CONTRIBUTING.md           # Development workflow
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Environment Variables
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+# Required
+REPLICATE_API_TOKEN=xxx       # Get from replicate.com
 
-## Deploy on Vercel
+# Development
+USE_MOCK_IMAGES=true          # Use placeholder images
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Development
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+# Run dev server
+npm run dev
+
+# Build for production
+npm run build
+
+# Run linter
+npm run lint
+```
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for branching workflow and PR guidelines.
+
+## Roadmap
+
+- [x] MVP: On-demand generation
+- [ ] User accounts & preferences
+- [ ] Daily email delivery
+- [ ] Stripe payments
+- [ ] iOS Shortcut for auto-wallpaper
+- [ ] Android app
+
+## License
+
+MIT
+
+---
+
+Built with ❤️ by Lei & Solona
