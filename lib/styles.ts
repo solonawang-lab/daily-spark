@@ -13,8 +13,8 @@ export const styles: Record<Style, StyleConfig> = {
     label: 'Minimalist',
     emoji: '◯',
     prompt: 'soft gradient background, geometric shapes, muted pastel colors, clean aesthetic, abstract minimal art',
-    textColor: '#1a1a1a',
-    shadowColor: 'rgba(255,255,255,0.8)',
+    textColor: '#ffffff',
+    shadowColor: 'rgba(0,0,0,0.6)',
   },
   nature: {
     label: 'Nature',

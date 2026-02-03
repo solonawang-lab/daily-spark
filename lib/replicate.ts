@@ -8,13 +8,15 @@ const replicate = new Replicate({
 // Multiple images per style for variety - randomly selected
 const MOCK_IMAGES: Record<string, string[]> = {
   minimalist: [
-    // Soft gradients and pastels
-    'https://images.unsplash.com/photo-1557683316-973673baf926?w=768&h=1344&fit=crop', // Pink/blue gradient
-    'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=768&h=1344&fit=crop', // Colorful gradient
-    'https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?w=768&h=1344&fit=crop', // Soft pink abstract
-    'https://images.unsplash.com/photo-1620121692029-d088224ddc74?w=768&h=1344&fit=crop', // Pastel waves
-    'https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=768&h=1344&fit=crop', // Soft gradient blobs
-    'https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?w=768&h=1344&fit=crop', // 3D abstract shapes
+    // Soft, muted gradients - clean and minimal
+    'https://images.unsplash.com/photo-1557683316-973673baf926?w=768&h=1344&fit=crop', // Soft pink/purple
+    'https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?w=768&h=1344&fit=crop', // Light peach/cream
+    'https://images.unsplash.com/photo-1517483000871-1dbf64a6e1c6?w=768&h=1344&fit=crop', // Subtle gray gradient
+    'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=768&h=1344&fit=crop', // Soft blue minimal
+    'https://images.unsplash.com/photo-1496715976403-7e36dc43f17b?w=768&h=1344&fit=crop', // Soft pink clouds
+    'https://images.unsplash.com/photo-1604076913837-52ab5629fba9?w=768&h=1344&fit=crop', // Soft smoke/mist
+    'https://images.unsplash.com/photo-1507400492013-162706c8c05e?w=768&h=1344&fit=crop', // Muted blue fog
+    'https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?w=768&h=1344&fit=crop', // Soft mountain mist
   ],
   nature: [
     // Mountains, landscapes, golden hour
